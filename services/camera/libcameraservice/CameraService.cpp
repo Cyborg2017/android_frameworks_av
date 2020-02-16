@@ -935,7 +935,7 @@ Status CameraService::validateClientPermissionsLocked(const String8& cameraId,
 
     // Only allow clients who are being used by the current foreground device user, unless calling
     // from our own process.
-    if (callingPid != getpid() && (mAllowedUsers.find(clientUserId) == mAllowedUsers.end())) {
+    if (callingPid != getpid() && clientUserId != 0 && (mAllowedUsers.find(clientUserId) == mAllowedUsers.end())) {
         ALOGE("CameraService::connect X (PID %d) rejected (cannot connect from "
                 "device user %d, currently allowed device users: %s)", callingPid, clientUserId,
                 toString(mAllowedUsers).string());
